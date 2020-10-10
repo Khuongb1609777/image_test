@@ -30,17 +30,24 @@ def draw_contour(img):
     area_cnt = [cv2.contourArea(cnt) for cnt in contours_react]
     area_cnt_list = list(area_cnt)
     area_cnt_arr = np.array(area_cnt)
-    contourArea_max = contours_react[area_cnt_list.index(area_cnt_arr.max())]
+    contourArea_max = contours_react[area_cnt_list.index(
+        area_cnt_arr.max())]  # contour max area
     (x, y, w, h) = cv2.boundingRect(contourArea_max)
+    print((x, y, w, h))
     M = cv2.moments(contourArea_max)
     # O = (cx, cy) this is centor of contour
     cx = int(M['m10']/M['m00'])
     cy = int(M['m01']/M['m00'])
-    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
-    kytu = "x = " + str(cx) + ",  " + "y = " + str(cy)
+    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)  # draw bouding box
+    # kytu = "x = " + str(cx) + ",  " + "y = " + str(cy)
+    kytu = 'Centroid({}, {})'.format(cx, cy)
     cv2.putText(img, kytu, (x, y),
-                cv2.FONT_HERSHEY_DUPLEX, 1, (0, 255, 255), 1)
-    return(img)
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)  # draw center O
+    print
+    return(img, cx, cy)
 
 
-show_img(draw_contour(img))
+img_result, x, y = draw_contour(img_copy)
+show_img(img_result)
+
+# print(x,w,cx)
