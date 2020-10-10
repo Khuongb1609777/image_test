@@ -49,5 +49,3 @@ def draw_contour(img):
 
 img_result, x, y = draw_contour(img_copy)
 show_img(img_result)
-
-# print(x,w,cx)
