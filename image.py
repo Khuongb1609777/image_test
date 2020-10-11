@@ -9,7 +9,7 @@ img_copy = img.copy()
 
 
 def show_img(img):
-    cv2.imshow(img_url, img)
+    cv2.imshow("image", img)
     cv2.waitKey(0)
 
 
